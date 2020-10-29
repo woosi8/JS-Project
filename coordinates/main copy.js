@@ -4,14 +4,14 @@ const vertical = document.querySelector('.vertical');
 const horozontal = document.querySelector('.horozontal');
 const target = document.querySelector('.target');
 const tag = document.querySelector('.tag');
-const targetRect = target.getBoundingClientRect();
-const targetHalfWidth = targetRect.width / 2;
-const targetHalfHeight = targetRect.height / 2;
 
 //load를 불러옴으로써 마우스무브 이벤트가 순서상 제일 늦게 발생되어 앞에 defer(dom) 타켓들이 정확히 다 잡힌다음에 오류없이 발생하기 위해서
 addEventListener('load', () =>{
 
-
+  const targetRect = target.getBoundingClientRect();
+  const targetHalfWidth = targetRect.width / 2;
+  const targetHalfHeight = targetRect.height / 2;
+  
   document.addEventListener('mousemove', event => {
     const x = event.clientX;
     const y = event.clientY;

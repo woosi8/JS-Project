@@ -42,6 +42,7 @@
 </head>
 <body>
     <ul class="buttons">
+        <li class="practice"></li>
         <li class="scroll-by">Scroll by 100px</li>
         <li class="scroll-to">Scroll to 100px</li>
         <li class="scroll-into">Scroll into special</li>
@@ -54,7 +55,7 @@
     <div class="box"></div>
     <div class="box"></div>
     <div class="box"></div>
-    <div class="box"></div>
+    <div class="box pr"></div>
 </body>
 <script>
 
@@ -82,7 +83,19 @@ const boxElem = document.querySelectorAll('.box');
     // }
     // })
            
-    
+
+    // 생성 연습한거
+    const btn = document.querySelector('.buttons');
+    const h2 = document.createElement('h2');
+    const pr = document.querySelector('.practice');
+    h2.setAttribute('class','title');
+    h2.textContent = 'This is practice';
+    h2.innerHTML = 'This is fake';
+    h2.innerHTML = `<img src ="../coordinates/img/target.png" alt="avatar">`; // 태그를 백틱을 이용해서 넣어줄수있다 (부분적인 변경이 일어나는 경우에는 적합하지 않다. 변경할때마다 웹에서 돔트리를 다시 생성하고 출력해야 해서)
+    // btn.insertBefore(h2,btn[1]);
+    btn.insertBefore(h2,pr);
+
+
     const special = document.querySelector('.special');
     special.addEventListener('click', event => {
         const rect = special.getBoundingClientRect();
@@ -117,4 +130,4 @@ const boxElem = document.querySelectorAll('.box');
         })
 </script>
 
-</html>
+</html>;
