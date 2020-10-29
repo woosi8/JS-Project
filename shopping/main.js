@@ -12,7 +12,7 @@ function onAdd() {
         return;
     }
     // 2. 새로운 아이템을 만듬 (텍스트 + 삭제 버튼)
-    const item = creatItem();
+    const item = creatItem(text);
     // 3. items 컨테이너안에 새로 만든 아이템을 추가한다.
     items.appendChild(item);
     // 4. 인풋을 초기화 한다.
@@ -35,7 +35,7 @@ function creatItem(text) {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute('class','item__delete');
-    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>' // 아이콘은 변동될일 없으니깐 이렇게 써준다
+    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';// 아이콘은 변동될일 없으니깐 이렇게 써준다
     deleteBtn.addEventListener('click', () =>{
         items.removeChild(itemRow);
     })
