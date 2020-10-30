@@ -24,23 +24,32 @@ function onAdd() {
 
 }
 
-let id = 0; /// 인티져로 해주는건 안좋다. 여기선 간단히 하기위해서 : UUID (유니크아이디)로 하는게 좋다. 아니면 오브젝트 해시코드이용
-
 function creatItem(text) {
     // item__row를 똑같이 구현해준다
     const itemRow = document.createElement('li');
     itemRow.setAttribute('class','item__row');
-    // String으로 해주기
-    itemRow.innerHTML = `
-    <div class="item" data-id=${id}>
-         <span class="item__name">${text}</span>
-         <button class="item__delete" data-id=${id}>
-             <i class="fas fa-trash-alt"></i>
-         </button>
-    </div>
-    <div class="itme__divier"></div>
-    `
-    id++
+
+    const item = document.createElement('div');
+    item.setAttribute('class','item');
+
+    const name = document.createElement('span');
+    name.setAttribute('class','item__name');
+    name.innerText = text;  //전달받은 텍스트 전달
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('class','item__delete');
+    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';// 아이콘은 변동될일 없으니깐 이렇게 써준다
+    deleteBtn.addEventListener('click', () =>{
+        items.removeChild(itemRow);
+    })
+
+    const itemDivider = document.createElement('div');
+    itemDivider.setAttribute('class','item__divider');
+
+    itemRow.appendChild(item);
+    itemRow.appendChild(itemDivider);
+    item.appendChild(name);
+    item.appendChild(deleteBtn);
     return itemRow;
 }
 
