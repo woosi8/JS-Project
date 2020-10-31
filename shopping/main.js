@@ -30,12 +30,13 @@ function creatItem(text) {
     // item__row를 똑같이 구현해준다
     const itemRow = document.createElement('li');
     itemRow.setAttribute('class','item__row');
+    itemRow.setAttribute('data-id', id);
     // String으로 해주기
     itemRow.innerHTML = `
-    <div class="item" data-id=${id}>
+    <div class="item" >
          <span class="item__name">${text}</span>
-         <button class="item__delete" data-id=${id}>
-             <i class="fas fa-trash-alt"></i>
+         <button class="item__delete">
+            <i class="fas fa-trash-alt ed" data-id=${id}></i>
          </button>
     </div>
     <div class="itme__divier"></div>
@@ -52,6 +53,23 @@ input.addEventListener('keypress',(event) =>{
     if (event.keyCode == 13) {
          onAdd();
     }
+});
 
+// 이벤트 위임
+items.addEventListener('click', event => {
+    const id = event.target.parentNode.dataset.id;
+    //   if (event.target.nodeName ==='path') { // 형제중에 같은 타입(path)이 있으면 같이 사라지는 위험이 있음.
+      if (id) { 
+         const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
+         toBeDeleted.remove();
+
+      }
+
+    // i class에 클래스 주어지고 클래스로 부모를 찾아서 삭제해보기
+    //   const id = event.target.parentNode.classList.contains('ed');
+    //   if (id) { 
+    //     const parent = event.target.parentNode.parentNode.parentNode.parentNode;
+    //     parent.remove();
+    //   }
 
 })
