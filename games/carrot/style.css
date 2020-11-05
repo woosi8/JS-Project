@@ -60,6 +60,7 @@ button {
   background-color: lightsalmon;
   border: solid 2.5px black;
   border-radius: 32px;
+  font-size: 30px;
 }
 /* modal */
 .modal {
@@ -72,6 +73,10 @@ button {
   display: none;
   animation: fadeIn 0.5s forwards ease-in;
   transition: 1.5s ease-in-out;
+}
+
+.result {
+  display: none;
 }
 
 .modal.hidden {
@@ -119,6 +124,9 @@ button {
   top: 60%;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 

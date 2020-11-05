@@ -1,8 +1,8 @@
 'use strict'
 
 // play__ground
-const bug = document.querySelector('.bugs');
-const carrot = document.querySelector('.carrots');
+const bug = document.querySelectorAll('.bugs');
+const carrot = document.querySelectorAll('.carrots');
 
 // timer
 const pause = document.querySelector('.pause__box');
@@ -12,11 +12,21 @@ const counterElem = document.querySelector('.count');
 // result
 const homeBtn = document.querySelectorAll('.home__contact')
 const modal = document.querySelector('.modal')
+const modalContent = document.querySelector('.modal__content')
 const overlay = document.querySelectorAll('.modal__overlay')
 const closeBtn = document.querySelectorAll('.closeBtn')
-
-const openModal = () => {
+const resultElem = document.querySelector('.result');
+const lostElem = document.createElement('div')
+lostElem.className = 'lost'
+lostElem.innerHTML =`you lost`
+const winElem = document.createElement('div')
+winElem.className = 'win'
+winElem.innerHTML =`you win`
+const openModal = (event) => {
     document.querySelector('.modal').classList.add('hidden')
+    document.querySelector('.modal__content').appendChild(lostElem)
+    document.querySelector('.modal__content').removeChild(winElem)
+
 }
 const closeModal = (event) => {
     event.currentTarget.parentNode.classList.remove('hidden')
@@ -27,14 +37,15 @@ overlay.forEach((event) => {
 closeBtn.forEach((event) => {
     event.addEventListener('click', closeModal)
 })
-bug.addEventListener('click', openModal);
-
+bug.forEach( bugs => {
+    bugs.addEventListener('click', openModal);
+});
 
 // timer
 let count = 3;
 let counter =setInterval(timer, 1000); 
 function timer(){
-  count=count-1;
+  count = count-1;
   if (count <= 0)
   {
      clearInterval(counter);
@@ -43,17 +54,31 @@ function timer(){
     count = 0
     } 
 
- timeElem.innerHTML= " 00:" + count ; // watch for spelling
+//  timeElem.innerHTML= " 00:" + count ; // watch for spelling
+ timeElem.innerHTML= `00:${count}` // watch for spelling
 }
     
 timer();
     
 
 //carrot
-const countDown = () => {
-    document.querySelector('.modal').classList.add('hidden')
+let numbers = 0;
+const countDown = (event) => {
+    if (numbers == 3) {
+        document.querySelector('.modal').classList.add('hidden');
+        document.querySelector('.modal__content').appendChild(winElem)
+        document.querySelector('.modal__content').removeChild(lostElem)
+
+    }
+    event.target.parentNode.removeChild(event.target);
+    // numbers+= 1;
+    numbers++;
+    counterElem.innerHTML = `${numbers}`
+
 }
-carrot.addEventListener('click', countDown);
+carrot.forEach(carrots =>{
+    carrots.addEventListener('click', countDown);
+})
 
 
 
