@@ -80,42 +80,49 @@ carrot.forEach(carrots =>{
     carrots.addEventListener('click', countDown);
 })
 
-const field = document.querySelector('.field'),
-      fieldRect = field.getBoundingClientRect();
-const carrotSize = 80;
+
+const field = document.querySelector('.game__field');
+const fieldRect = field.getBoundingClientRect();
+const carrot_size = 80;
+
+const pickElem = function randomNum(lower,upper) {
+    for (let i = 0; i < 1; i++) {
+        let myRandom = Math.floor(Math.random() * (upper - lower + 1)) + lower;
+        return myRandom;
+    }
+}
+const carrotCount = pickElem(5,10);
+const bugCount = pickElem(5,10);
 
 function initGame() {
-    addItem('carrot',5,'img/carrot.png')
-    addItem('bug',5,'img/bug.png')
-    
+    addItem('carrot',carrotCount,'img/carrot.png');
+    addItem('bug',bugCount,'img/bug.png');
 }
 
-function addItem(className,count,imgPath) {
+function addItem(className, count, imgPath) {
     const x1 = 0;
     const y1 = 0;
-    const x2 = fieldRect.width - carrotSize;
-    const y2 = fieldRect.height - carrotSize;
+    const x2 = fieldRect.width;
+    const y2 = fieldRect.height;
     for (let i = 0; i < count; i++) {
         const item = document.createElement('img');
-        item.setAttribute('class', className);
-        item.setAttribute('scr',imgPath);
-        item.style.position = 'absolute';
+        item.setAttribute('class',className);
+        item.setAttribute('src',imgPath);
+        item.style.position = 'absoulte';
         const x = randomNumber(x1,x2);
         const y = randomNumber(y1,y2);
         item.style.left = `${x}px`;
         item.style.top = `${y}px`;
-        const playGround = document.querySelector('.play__ground');
-        playGround.appendChild(item)
-        
+        field.appendChild(item);
     }
 }
 
-function randomNumber(min, max) {
-    return Math.random() * (max - min) + min
+function randomNumber(min,max) {
+    return Math.random() * (max - min) + min;
+    
 }
 
 initGame();
-    
 
 
 
