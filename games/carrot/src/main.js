@@ -3,7 +3,7 @@
 // import * as sound from './sound.js' // sound이름 전부다
 import PopUp from './popup.js';
 // import Game from './game.js';
-import GameBuilder from './game.js';
+import {GameBuilder, Reason} from './game.js';
 
 const pickElem = function randomNum (lower, upper) {
     for(var i=0; i<1; i++) {
@@ -27,9 +27,7 @@ const game = new GameBuilder()
 .carrotCount(carrotCount)
 .bugCount(bugCount)
 .build();
-gameFinishBanner.setClickListener(() =>{
-    game.start();
-})
+
 
 
 
@@ -37,19 +35,23 @@ gameFinishBanner.setClickListener(() =>{
 game.setGamestopListener((reason) =>{
     let message;
     switch(reason){
-        case 'cancle' :
+        case Reason.cancle :
             message = 'Replay?'
             break;
-        case 'win':
+        case Reason.win:
             message = 'You Won?'
             break;
-        case 'lose':
+        case Reason.lose:
             message = 'You Lost?'
             break;
         default :
             throw new Error('not valid reason');
     }
     gameFinishBanner.showWithText(message);
+})
+
+gameFinishBanner.setClickListener(() =>{
+    game.start();
 })
 
 

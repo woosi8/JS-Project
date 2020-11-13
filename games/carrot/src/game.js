@@ -4,8 +4,16 @@ import Filed from './field.js'
 // const GAME_DURATION_SEC = 5;
 
 
+// 타입 보장해주기
+export const Reason = Object.freeze({ //문자열을 쓰지 못하게 만들기 (지정된 object의 키값들만 쓸수있도록)
+    win:'win',
+    lose:'lose',
+    cancel:'cancel',
+})
+
+
 // Builder Pattern
-export default class GameBuilder{
+export class GameBuilder{
     gameDuration(duration){
         this.gameDuration = duration;
         return this;
@@ -75,7 +83,7 @@ class Game{
         // this.gameFinishBanner.showWithText('REPLAY?')
         sound.playAlert();
         sound.stopBackground();
-        this.onGameStop && this.onGameStop('cancel');
+        this.onGameStop && this.onGameStop(Reason.cancel);
     }
 
      finish(win) {
@@ -89,7 +97,7 @@ class Game{
         }
         this.stopGameTimer();
         sound.stopBackground();
-        this.onGameStop && this.onGameStop(win ? 'win' : 'lose');
+        this.onGameStop && this.onGameStop(win ? Reason.win : Reason.lose);
         
     }
 
