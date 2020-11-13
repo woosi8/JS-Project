@@ -4,6 +4,7 @@
 import PopUp from './popup.js';
 // import Game from './game.js';
 import {GameBuilder, Reason} from './game.js';
+import * as sound from './sound.js' // sound이름 전부다
 
 const pickElem = function randomNum (lower, upper) {
     for(var i=0; i<1; i++) {
@@ -23,9 +24,9 @@ const gameFinishBanner = new PopUp();
 
 // object를 간편하고 알기 쉽게 하기 위해 개선한 방법임
 const game = new GameBuilder() 
-.gameDuration(5)
-.carrotCount(carrotCount)
-.bugCount(bugCount)
+.withgameDuration(5)
+.withcarrotCount(carrotCount)
+.withbugCount(bugCount)
 .build();
 
 
@@ -37,12 +38,15 @@ game.setGamestopListener((reason) =>{
     switch(reason){
         case Reason.cancle :
             message = 'Replay?'
+            sound.playAlert();
             break;
         case Reason.win:
             message = 'You Won?'
+            sound.playWin();
             break;
         case Reason.lose:
             message = 'You Lost?'
+            sound.playBug();
             break;
         default :
             throw new Error('not valid reason');
