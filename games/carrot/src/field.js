@@ -27,7 +27,6 @@ export default class Filed{
 
     //underbar = private function
     _addItem(className, count, imgPath) {
-        console.log(count);
         const x1 = 0;
         const y1 = 0;
         const x2 = this.fieldRect.width - CARROT_SIZE;

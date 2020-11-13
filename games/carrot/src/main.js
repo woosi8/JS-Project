@@ -3,6 +3,8 @@
 import PopUp from './popup.js'
 import Filed from './field.js'
 import * as sound from './sound.js' // sound이름 전부다
+import Game from './game.js';
+
 
 
 
@@ -106,7 +108,7 @@ function finishGame(win) {
         sound.playBug();
     }
     stopGameTimer();
-    stopSound(bgSound);
+    sound.stopBackground();
     gameFinishBanner.showWithText(win? 'You Won' : 'You Lost')
     
 }
