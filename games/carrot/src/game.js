@@ -5,17 +5,17 @@ import * as sound from './sound.js' // sound이름 전부다
 // const GAME_DURATION_SEC = 5;
 
 
-// 타입 보장해주기
+// 타입 보장해주기 (문자열을 전달하는게 아닌 타입을 전달하도록)
 export const Reason = Object.freeze({ //문자열을 쓰지 못하게 만들기 (지정된 object의 키값들만 쓸수있도록)
-    win:'win',
-    lose:'lose',
-    cancel:'cancel',
+    win: 'win',
+    lose: 'lose',
+    cancel: 'cancel',
 })
 
 
 // Builder Pattern
-export class GameBuilder{
-    withgameDuration(duration){
+export class GameBuilder {
+    withgameDuration(duration) {
         this.gameDuration = duration;
         return this;
     }
@@ -29,7 +29,7 @@ export class GameBuilder{
         return this;
     }
 
-    build(){
+    build() {
         return new Game(
             this.gameDuration, //
             this.carrotCount,
@@ -39,22 +39,22 @@ export class GameBuilder{
 }
 
 // 이건 숨긴다
-class Game{
-    constructor(gameDuration, carrotCount, bugCount){
+class Game {
+    constructor(gameDuration, carrotCount, bugCount) {
         this.gameDuration = gameDuration;
         this.carrotCount = carrotCount;
         this.bugCount = bugCount;
         this.gameTimer = document.querySelector('.game__timer');
         this.gameScore = document.querySelector('.game__score');
         this.gameBtn = document.querySelector('.game__button');
-        this.gameBtn.addEventListener('click', () =>{
+        this.gameBtn.addEventListener('click', () => {
             if (this.started) {
                 this.stop(Reason.cancel);
-            } else{
+            } else {
                 this.start();
             }
         });
-        this.gameField = new Filed(carrotCount,bugCount);
+        this.gameField = new Filed(carrotCount, bugCount);
         this.gameField.setClickListener(this.onItemClick);
         this.started = false;
         this.score = 0;
@@ -62,7 +62,7 @@ class Game{
     }
 
     // 게임이 끝나면 알려주는 콜백 받아오기 (new)
-    setGamestopListener(onGameStop){
+    setGamestopListener(onGameStop) {
         this.onGameStop = onGameStop;
     }
 
@@ -96,10 +96,10 @@ class Game{
             if (this.score === this.carrotCount) {
                 this.stop(Reason.win);
             }
-        } else if ( item === ItemType.bug) {
+        } else if (item === ItemType.bug) {
             this.stop(Reason.lose);
         }
-    
+
     }
 
 
@@ -111,32 +111,32 @@ class Game{
         icon.classList.remove('fa-play');
         this.gameBtn.style.visibility = 'visible';
     }
-    
+
     hideGameButton() {
         this.gameBtn.style.visibility = 'hidden';
     }
 
-    
-    
+
+
     showTimerAndScore() {
         this.gameTimer.style.visibility = 'visible';
         this.gameScore.style.visibility = 'visible';
-        
+
     }
-    
+
     startGameTimer() {
         let remainingTimeSec = this.gameDuration;
         this.updateTimerText(remainingTimeSec);
-        this.timer = setInterval(() =>{
-            if (remainingTimeSec <=0) {
+        this.timer = setInterval(() => {
+            if (remainingTimeSec <= 0) {
                 clearInterval(this.timer);
                 this.stop(this.carrotCount === this.score ? Reason.win : Reason.lose);
                 return;
             }
             this.updateTimerText(--remainingTimeSec)
-        },1000);
+        }, 1000);
     }
-    
+
     stopGameTimer() {
         clearInterval(this.timer);
         // hideGameButton();
@@ -148,13 +148,13 @@ class Game{
         const seconds = time % 60;
         this.gameTimer.innerHTML = `${minutes}:${seconds}`
     }
-    
+
     initGame() {
         this.score = 0;
         this.gameScore.innerText = this.carrotCount;
         this.gameField.init();
     }
-    
+
     updateScoreBoard() {
         this.gameScore.innerText = this.carrotCount - this.score;
     }
