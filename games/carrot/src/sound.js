@@ -28,12 +28,12 @@ export function stopBackground() {
 
 
 function playSound(sound) {
-    sound.currentTime = 0; // 플레이가 항상 처음부터 시작되도록
+    sound.currentTime = 0;
     sound.play();
-    
+
 }
 
 
 function stopSound(sound) {
     sound.pause();
-  }
+}

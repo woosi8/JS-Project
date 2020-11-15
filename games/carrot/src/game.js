@@ -1,12 +1,9 @@
 'use strict';
 import { Filed, ItemType } from './field.js'
-import * as sound from './sound.js' // sound이름 전부다
-
-// const GAME_DURATION_SEC = 5;
-
+import * as sound from './sound.js'
 
 // 타입 보장해주기 (문자열을 전달하는게 아닌 타입을 전달하도록)
-export const Reason = Object.freeze({ //문자열을 쓰지 못하게 만들기 (지정된 object의 키값들만 쓸수있도록)
+export const Reason = Object.freeze({
     win: 'win',
     lose: 'lose',
     cancel: 'cancel',
@@ -38,7 +35,6 @@ export class GameBuilder {
     }
 }
 
-// 이건 숨긴다
 class Game {
     constructor(gameDuration, carrotCount, bugCount) {
         this.gameDuration = gameDuration;
@@ -61,7 +57,6 @@ class Game {
         this.timer = undefined;
     }
 
-    // 게임이 끝나면 알려주는 콜백 받아오기 (new)
     setGamestopListener(onGameStop) {
         this.onGameStop = onGameStop;
     }
@@ -81,7 +76,6 @@ class Game {
         this.started = false;
         this.stopGameTimer();
         this.hideGameButton();
-        // this.gameFinishBanner.showWithText('REPLAY?')
         sound.stopBackground();
         this.onGameStop && this.onGameStop(reason);
     }
@@ -101,9 +95,6 @@ class Game {
         }
 
     }
-
-
-
 
     showStopButton() {
         const icon = this.gameBtn.querySelector('.fas')
@@ -139,8 +130,6 @@ class Game {
 
     stopGameTimer() {
         clearInterval(this.timer);
-        // hideGameButton();
-        // gameFinishBanner.showWithText('REPLAY?')
     }
 
     updateTimerText(time) {
