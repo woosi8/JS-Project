@@ -4,16 +4,16 @@ let score = 0;
 let started = false;
 const GAME_DURATION_SEC = 5;
 
-export default class Game{
-    constructor(){
+export default class Game {
+    constructor() {
 
         this.gameBtn = document.querySelector('.game__button');
         this.gameTimer = document.querySelector('.game__timer');
         this.gameScore = document.querySelector('.game__score');
-        this.gameBtn.addEventListener('click', () =>{
+        this.gameBtn.addEventListener('click', () => {
             if (started) {
                 stopGame();
-            } else{
+            } else {
                 startGame();
             }
         });
@@ -47,29 +47,29 @@ export default class Game{
     startGameTimer() {
         let remainingTimeSec = GAME_DURATION_SEC;
         updateTimerText(remainingTimeSec);
-        timer = setInterval(() =>{
-            if (remainingTimeSec <=0) {
+        timer = setInterval(() => {
+            if (remainingTimeSec <= 0) {
                 clearInterval(timer);
                 finishGame(carrotCount === score);
                 return;
             }
             updateTimerText(--remainingTimeSec)
-        },1000);
+        }, 1000);
     }
-    
+
     updateTimerText(time) {
         const minutes = Math.floor(time / 60);
         const seconds = time % 60;
         gameTimer.innerHTML = `${minutes}:${seconds}`
     }
-    
-    
+
+
     stopGameTimer() {
         clearInterval(timer);
         hideGameButton();
         gameFinishBanner.showWithText('REPLAY?')
     }
-    
+
     updateScoreBoard() {
         gameScore.innerText = carrotCount - score;
     }
