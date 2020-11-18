@@ -26,11 +26,15 @@ export class GameBuilder {
         return this;
     }
 
+    teste(ddd) {
+        this.ddd = ddd;
+        return `${ddd} ya`;
+    }
     build() {
         return new Game(
-            this.gameDuration, //
+            this.gameDuration,
             this.carrotCount,
-            this.bugCount
+            this.bugCount,
         )
     }
 }

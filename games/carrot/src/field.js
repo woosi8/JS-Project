@@ -24,7 +24,9 @@ export class Filed {
     setClickListener(onItemClick) {
         this.onItemClick = onItemClick;
     }
-
+    test(gost) {
+        this.gost = gost
+    }
     _addItem(className, count, imgPath) {
         const x1 = 0;
         const y1 = 0;

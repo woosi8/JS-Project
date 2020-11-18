@@ -2,6 +2,7 @@
 import PopUp from './popup.js';
 import { GameBuilder, Reason } from './game.js';
 import * as sound from './sound.js'
+import { Filed } from './field.js';
 
 const pickElem = function randomNum(lower, upper) {
   for (var i = 0; i < 1; i++) {
@@ -23,6 +24,7 @@ const game = new GameBuilder()
   .withcarrotCount(carrotCount)
   .withbugCount(bugCount)
   .build();
+
 
 game.setGamestopListener((reason) => {
   let message;
